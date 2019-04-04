@@ -1,52 +1,67 @@
-﻿// TablicaDynamiczna.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
+// Sortowanie.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "pch.h"			//biblioteka visuala
+#include "pch.h"
 #include <iostream>
 
 using namespace std;
 
+struct para {
+	int l;
+	int p;
+};
+
 int main()
 {
-	int *tabDyn;														//wskaznik na tablice dynamiczna (pokazuje element [0])
-	int wielkTab=4;														//poczatkowa wielkosc tablicy
-	int liczTab=0;														//licznik ile jest elementow tablicy
-	int we;																//wejscie
+	int ilosc;
+	int we;
+	para *tab;
+	cin >> ilosc;
+	tab = new para[ilosc+1];
 
-	tabDyn = new int[wielkTab];											//allokujemy pamieci na tablice 4 elementowa
-
-	do {																//randomowa petla aby z banalnym warunkiem gwarantujacym kioniec jej zycia
-			cin >> we;													//wczytywanie elementow do tablicy ooraz zwiekszenie licznika ilosic elementow w tablicy ->MUSI byc kontrola, poniewaz przy dynamicznych tablicach latwo o wycieki danych,-
-			tabDyn[liczTab] = we;
-			cout << liczTab << "--> " << tabDyn[liczTab] << endl;
-			liczTab++;
-			if (liczTab == wielkTab) {									//warunek spradzajacy czy tablica jest zapelniona po "brzeg"
-				int *temp;												//twotrzenie tymczasowej zmiennej ktora wskazywac bedize na tablice kiedy tymczasem stworzymu NOWA! z wielkoscia zwiekszona DWUKROTNIE
-				temp = tabDyn;
-				tabDyn = new int[wielkTab * 2];
-				for (int i = 0; i < wielkTab; i++) {					//po stworzeniu nowej, Lepszej, WIEKSZEJ tablicy kopiujemy elementy do nowej tablicy po czym brutalnie mordujemy TEMP'a a wielkosc na stale zmieniamy bna nowa WIEKSZA LEPSZA!
-					tabDyn[i] = temp[i];
-				}
-				delete temp;
-				wielkTab = wielkTab * 2;
+	for (int i = 0; i < ilosc; i++) {
+		for (int j = 0; j < 2; j++) {
+			cin >> we;
+			if (j == 0) {
+				tab[i].l=we;
 			}
-
-	} while (we != 666);
-
-
-	cout << "\n SPRAWDZENIE\n";
-	for (int i = 0; i < liczTab; i++) {
-		cout << i+1 << "--> " << tabDyn[i] << endl;						//wypisanie kontrolne
+			else {
+				tab[i].p=we;
+			}
+		}
 	}
+	cout << "Tryb" << endl;
+	cin >> we;
+
+	for (int i = 0; i < ilosc; i++) {
+		for (int j = i; j < ilosc-1; j++) {
+			if (tab[j].l <= tab[j+1].l) {
+				int temp;
+				temp = tab[j].l;
+				tab[j].l = tab[j + 1].l;
+				tab[j + 1].l = temp;
+			}
+		}
+	}
+	if (we == 0) {
+		for (int i = ilosc-1; i > 0; i--) {
+			cout << tab[i].l << " " << tab[i].p << endl;
+		}
+	}
+	if (we == 1) {
+
+	}
+
+	cout << "Hello World!\n";
 }
 
-// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
-// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
 
-// Porady dotyczące rozpoczynania pracy:
-//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
-//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
-//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
-//   4. Użyj okna Lista błędów, aby zobaczyć błędy
-//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
-//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+// 6. In the future, to open this project again, go to File > Open > Project and select the .sln file

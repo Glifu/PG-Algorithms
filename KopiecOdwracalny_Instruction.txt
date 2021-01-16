@@ -1,0 +1,100 @@
+Kopiec odwracalny
+Zaimplementuj (samodzielnie) kopiec maksymalizujący i następujące operacje na nim:
+
++ v
+    dodanie do kopca liczby v
+-
+    usunięcie z kopca maksimum i wypisanie go na ekran
+p
+    wypisanie wszystkich elementów z kopca w kolejności, w jakiej znajdują się w tablicy
+r n v1 ...vn
+    usunięcie z kopca wszystkich elementów i wpisanie do niego n nowych, o wartościach v1 ...vn
+s
+    zmiana orientacji kopca – z maksymalizującego na minimalizujący; po tym poleceniu - powinien zwracać najmniejszy element; drugie polecenie s powinno przywracać porządek maksymalizujący
+q
+    zakończenie programu
+
+Rozmiar żadnego nie przekroczy 65536 elementów.
+Wejście
+Na wejściu pojawi się ciąg poleceń w przedstawionym wyżej formacie. Ostatnim poleceniem będzie polecenie q.
+Wyjście
+Na wyjściu należy wypisać wynik poleceń - i p.
+Przykład
+
+Wejście
++ 1
++ 2
++ 3
++ 4
++ 5
++ 6
++ 7
++ 8
+p
+-
+-
+-
+-
+-
+-
+-
+-
+p
+r 8 1 2 3 4 5 6 7 8
+p
+-
+-
+-
+-
+-
+-
+-
+-
+p
+r 8 1 2 3 4 5 6 7 8
+s
+p
+-
+-
+-
+-
+-
+-
+-
+-
+p
+q
+
+
+Wyjście
+8 7 6 4 3 2 5 1 
+8
+7
+6
+5
+4
+3
+2
+1
+
+8 5 7 4 1 6 3 2 
+8
+7
+6
+5
+4
+3
+2
+1
+
+1 2 3 4 5 6 7 8 
+1
+2
+3
+4
+5
+6
+7
+8
+
+
